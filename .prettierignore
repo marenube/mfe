@@ -1,0 +1,15 @@
+# Next.js
+.next
+
+# build outputs
+dist
+build
+
+# legacy static artifacts
+public/legacy
+
+# vendor / minified
+*.min.js
+
+# package managers
+node_modules
