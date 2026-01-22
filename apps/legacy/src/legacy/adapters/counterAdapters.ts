@@ -1,5 +1,7 @@
-import { counterStore } from '@repo/store';
+import { getCounterStore } from '@repo/store';
 import { counterModel } from '../app/models/counter';
+
+const counterStore = getCounterStore();
 
 counterModel.on('change:count', () => {
   counterStore.set(counterModel.get('count'));

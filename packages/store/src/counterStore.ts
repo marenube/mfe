@@ -39,3 +39,19 @@ declare global {
 
 export const counterStore =
   window.__COUNTER_STORE__ ?? (window.__COUNTER_STORE__ = new CounterStore());
+
+let store: CounterStore | null = null;
+
+export function getCounterStore(): CounterStore {
+  if (typeof window === 'undefined') {
+    throw new Error('counterStore는 client에서만 사용해야 합니다.');
+  }
+
+  if (!store) {
+    store =
+      window.__COUNTER_STORE__ ??
+      (window.__COUNTER_STORE__ = new CounterStore());
+  }
+
+  return store;
+}

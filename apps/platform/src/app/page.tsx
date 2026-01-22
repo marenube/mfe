@@ -1,8 +1,22 @@
 'use client';
 
-import Counter from '@repo/ui-react/Counter';
-import { counterStore } from '@repo/store';
+import dynamic from 'next/dynamic';
+
+const ClientCounter = dynamic(
+  async () => {
+    const { getCounterStore } = await import('@repo/store');
+    const Counter = (await import('@repo/ui-react/Counter')).default;
+
+    return function CounterWrapper() {
+      const store = getCounterStore();
+      return <Counter counter={store} />;
+    };
+  },
+  {
+    ssr: false,
+  }
+);
 
 export default function PlatformHomePage() {
-  return <Counter counter={counterStore} />;
+  return <ClientCounter />;
 }
